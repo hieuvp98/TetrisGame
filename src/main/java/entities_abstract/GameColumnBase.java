@@ -8,6 +8,8 @@ public abstract class GameColumnBase {
 
     protected ArrayList<SquareBase> squareBases;
 
+    protected PlayArenaBase playArenaBase;
+
     public abstract boolean checkFull();
 
     public abstract void addSquare(SquareBase square);
@@ -20,5 +22,13 @@ public abstract class GameColumnBase {
 
     public void setSquareBases(ArrayList<SquareBase> squareBases) {
         this.squareBases = squareBases;
+    }
+
+    public PlayArenaBase getPlayArenaBase() {
+        return playArenaBase;
+    }
+
+    public void setPlayArenaBase(PlayArenaBase playArenaBase) {
+        this.playArenaBase = playArenaBase;
     }
 }

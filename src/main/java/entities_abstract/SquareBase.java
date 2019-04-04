@@ -5,9 +5,11 @@ import java.awt.*;
 
 public abstract class SquareBase {
 
-    protected double width;
+    public static  final int WIDTH = 25;
 
-    protected double height;
+    public static  final  int HEIGHT = 25;
+
+    public static final String URL = "";
 
     protected double positionX;
 
@@ -31,6 +33,13 @@ public abstract class SquareBase {
 
     protected GameColumnBase column;
 
+    public SquareBase(GameColumnBase col, GameRowBase row, int index){
+        Icon icon = new ImageIcon(getClass().getResource(URL));
+        this.image = new JLabel(icon);
+        image.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+        addToPanel(row,col,index);
+    }
+
     public abstract void addToPanel(GameRowBase row,GameColumnBase column,int index);
 
     public abstract void remove();
@@ -39,21 +48,7 @@ public abstract class SquareBase {
 
     public abstract void updateUI();
 
-    public double getWidth() {
-        return width;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
+    public abstract boolean checkMovable();
 
     public double getPositionX() {
         return positionX;
