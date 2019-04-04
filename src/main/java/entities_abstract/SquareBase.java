@@ -31,7 +31,7 @@ public abstract class SquareBase {
 
     protected GameColumnBase column;
 
-    public abstract void addToPanel(GameRowBase row,GameColumnBase column);
+    public abstract void addToPanel(GameRowBase row,GameColumnBase column,int index);
 
     public abstract void remove();
 

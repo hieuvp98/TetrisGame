@@ -10,7 +10,9 @@ public abstract class GameColumnBase {
 
     public abstract boolean checkFull();
 
-    public abstract void addSquare(SquareBase squareBase);
+    public abstract void addSquare(SquareBase square);
+
+    public abstract void removeSquare(SquareBase square);
 
     public ArrayList<SquareBase> getSquareBases() {
         return squareBases;

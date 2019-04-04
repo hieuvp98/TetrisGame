@@ -12,6 +12,8 @@ public abstract class GameRowBase {
 
     public abstract void addSquare(SquareBase square,int index);
 
+    public abstract void removeSquare(SquareBase square);
+
     public ArrayList<SquareBase> getSquareBases() {
         return squareBases;
     }
