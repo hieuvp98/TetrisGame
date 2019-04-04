@@ -9,4 +9,14 @@ public abstract class GameRowBase {
     public abstract boolean checkFull();
 
     public abstract boolean remove();
+
+    public abstract void addSquare(SquareBase square,int index);
+
+    public ArrayList<SquareBase> getSquareBases() {
+        return squareBases;
+    }
+
+    public void setSquareBases(ArrayList<SquareBase> squareBases) {
+        this.squareBases = squareBases;
+    }
 }
