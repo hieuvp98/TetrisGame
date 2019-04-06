@@ -4,6 +4,8 @@ import entities_abstract.GameRowBase;
 import entities_abstract.SquareBase;
 import views.Controller;
 
+import java.util.Arrays;
+
 public class GameRow extends GameRowBase {
     public GameRow(Controller playArenaBase, int index) {
         super(playArenaBase, index);
@@ -11,12 +13,18 @@ public class GameRow extends GameRowBase {
 
     @Override
     public boolean checkFull() {
-        return this.squareBases.size() == 10;
+        int dem = 0;
+        for (SquareBase squareBase : this.squareBases) {
+            if (squareBase != null) dem++;
+        }
+        return dem == 10;
     }
 
     @Override
     public void remove() {
-        this.squareBases.clear();
+        for (int i = 0; i < 10; i++) {
+            squareBases[i] = null;
+        }
         for (int i = 0; i < 10; i++) {
             this.playArenaBase.gridPane.add(null, i, indexRow);
         }
@@ -24,13 +32,13 @@ public class GameRow extends GameRowBase {
 
     @Override
     public void addSquare(SquareBase square, int index) {
-        this.squareBases.add(index, square);
+        this.squareBases[index] = square;
         this.playArenaBase.gridPane.add(square.getImageView(), index, this.indexRow);
     }
 
     @Override
-    public void removeSquare(int index) {
-        this.squareBases.remove(index);
-        this.playArenaBase.gridPane.add(null, index, indexRow);
+    public void removeSquare(SquareBase square) {
+        this.squareBases[Arrays.asList(this.squareBases).indexOf(square)] = null;
+        this.playArenaBase.gridPane.getChildren().remove(square.getImageView());
     }
 }

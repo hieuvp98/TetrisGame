@@ -25,13 +25,13 @@ public class TBlock extends BlockBase {
     public boolean checkTransformable() {
         switch (statusForm) {
             case 1: {
-                ArrayList<SquareBase> squareBases = playArena.getRows().get(mainRow + 1).getSquareBases();
-                if (squareBases.get(mainCol - 1) != null || squareBases.get(mainCol) != null)
+                SquareBase[] squareBases = playArena.getRows().get(mainRow + 1).getSquareBases();
+                if (squareBases[mainCol - 1] != null || squareBases[mainCol] != null)
                     return false;
             }
             case 2: {
-                ArrayList<SquareBase> squareBases = playArena.getColumns().get(mainCol).getSquareBases();
-                if (squareBases.get(mainRow - 1) != null || squareBases.get(mainRow) != null)
+                SquareBase[] squareBases = playArena.getColumns().get(mainCol).getSquareBases();
+                if (squareBases[mainRow - 1] != null || squareBases[mainRow] != null)
                     return false;
             }
             case 3:

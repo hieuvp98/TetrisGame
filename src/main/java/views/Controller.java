@@ -35,25 +35,25 @@ public class Controller  implements Initializable {
        initGrid();
        initRowsCols();
        imgNext.setImage(new Image(getClass().getClassLoader().getResource("images/T-block.png").toExternalForm()));
-//       currentBlock = new TBlock(this,5,1);
-//       currentBlock.addToPanel();
+       currentBlock = new TBlock(this,6,1);
+       currentBlock.addToPanel();
     }
 
     private void initGrid(){
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             gridPane.addRow(i);
         }
         for (int i = 1; i < 10; i++){
             gridPane.addColumn(i);
         }
-        gridPane.setGridLinesVisible(true);
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0;j < 10; j++){
-                Label node = new Label();
-                node.getStyleClass().add("node");
-                gridPane.add(node,j,i);
-            }
-        }
+        gridPane.setGridLinesVisible(false);
+//        for (int i = 0; i < 15; i++) {
+//            for (int j = 0;j < 10; j++){
+//                Label node = new Label();
+//                node.getStyleClass().add("node");
+//                gridPane.add(node,j,i);
+//            }
+//        }
     }
 
     private void initRowsCols(){

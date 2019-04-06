@@ -14,8 +14,8 @@ public class Square extends SquareBase {
 
     @Override
     public void addToPanel() {
-        playArena.getRows().get(indexRow).addSquare(this,indexRow);
-        playArena.getColumns().get(indexCol).addSquare(this,indexCol);
+        playArena.getRows().get(indexRow).addSquare(this,indexCol);
+        playArena.getColumns().get(indexCol).addSquare(this,indexRow);
     }
 
     @Override
@@ -32,25 +32,25 @@ public class Square extends SquareBase {
     @Override
     public void updateUI() {
         GameRowBase row = playArena.getRows().get(indexRow);
-        row.removeSquare(row.getSquareBases().indexOf(this));
+        row.removeSquare(this);
         GameColumnBase col = playArena.getColumns().get(indexCol);
-        col.removeSquare(col.getSquareBases().indexOf(this));
+        col.removeSquare(this);
         playArena.getRows().get(indexRow).addSquare(this,indexRow);
         playArena.getColumns().get(indexCol).addSquare(this,indexCol);
     }
 
     @Override
     public boolean checkMoveDown() {
-        return playArena.getColumns().get(this.indexCol).getSquareBases().get(this.indexRow+1) == null;
+        return playArena.getColumns().get(this.indexCol).getSquareBases()[this.indexRow+1] == null;
     }
 
     @Override
     public boolean checkMoveLeft() {
-        return playArena.getRows().get(this.indexRow).getSquareBases().get(this.indexCol-1) == null;
+        return playArena.getRows().get(this.indexRow).getSquareBases()[this.indexCol-1] == null;
     }
 
     @Override
     public boolean checkMoveRight() {
-        return playArena.getRows().get(this.indexRow).getSquareBases().get(this.indexCol+1) == null;
+        return playArena.getRows().get(this.indexRow).getSquareBases()[this.indexCol+1] == null;
     }
 }

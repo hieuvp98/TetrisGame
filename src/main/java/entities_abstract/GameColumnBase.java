@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public abstract class GameColumnBase {
 
-    protected ArrayList<SquareBase> squareBases;
+    protected SquareBase[] squareBases;
 
     protected Controller playArenaBase;
 
@@ -15,8 +15,7 @@ public abstract class GameColumnBase {
 
     public GameColumnBase(Controller playArenaBase,int indexCol) {
         this.playArenaBase = playArenaBase;
-        squareBases = new ArrayList<>();
-        squareBases.ensureCapacity(15);
+        squareBases = new SquareBase[10];
         this.indexCol = indexCol;
     }
 
@@ -24,13 +23,13 @@ public abstract class GameColumnBase {
 
     public abstract void addSquare(SquareBase square, int index);
 
-    public abstract void removeSquare(int index);
+    public abstract void removeSquare(SquareBase square);
 
-    public ArrayList<SquareBase> getSquareBases() {
+    public SquareBase[] getSquareBases() {
         return squareBases;
     }
 
-    public void setSquareBases(ArrayList<SquareBase> squareBases) {
+    public void setSquareBases(SquareBase[] squareBases) {
         this.squareBases = squareBases;
     }
 
@@ -40,5 +39,13 @@ public abstract class GameColumnBase {
 
     public void setIndexCol(int indexCol) {
         this.indexCol = indexCol;
+    }
+
+    public Controller getPlayArenaBase() {
+        return playArenaBase;
+    }
+
+    public void setPlayArenaBase(Controller playArenaBase) {
+        this.playArenaBase = playArenaBase;
     }
 }
