@@ -1,39 +1,68 @@
 package entities;
 
 import entities_abstract.BlockBase;
+import entities_abstract.SquareBase;
+import views.Controller;
 
-import java.awt.*;
+import java.util.ArrayList;
 
 public class TBlock extends BlockBase {
 
 
-    @Override
-    public void addToPanel(Panel playArena) {
-
+    public TBlock(Controller playArena, int mainCol, int mainRow) {
+        super(playArena, mainCol, mainRow);
     }
 
     @Override
-    public void move() {
-
-    }
-
-    @Override
-    public void updateUI() {
-
-    }
-
-    @Override
-    public void transform() {
-
-    }
-
-    @Override
-    public boolean checkMovable() {
-        return false;
+    public void init() {
+        matrix[0] = new Square(playArena, mainRow - 1, mainCol);
+        matrix[1] = new Square(playArena, mainRow, mainCol - 1);
+        matrix[2] = new Square(playArena, mainRow, mainCol);
+        matrix[3] = new Square(playArena, mainRow, mainCol + 1);
     }
 
     @Override
     public boolean checkTransformable() {
-        return false;
+        switch (statusForm) {
+            case 1: {
+                ArrayList<SquareBase> squareBases = playArena.getRows().get(mainRow + 1).getSquareBases();
+                if (squareBases.get(mainCol - 1) != null || squareBases.get(mainCol) != null)
+                    return false;
+            }
+            case 2: {
+                ArrayList<SquareBase> squareBases = playArena.getColumns().get(mainCol).getSquareBases();
+                if (squareBases.get(mainRow - 1) != null || squareBases.get(mainRow) != null)
+                    return false;
+            }
+            case 3:
+            case 4: {
+                break;
+            }
+
+        }
+        return true;
+    }
+
+    @Override
+    public void form1() {
+        matrix[0].reLocate(mainRow - 1, mainCol);
+        matrix[1].reLocate(mainRow, mainCol - 1);
+        matrix[2].reLocate(mainRow, mainCol);
+        matrix[3].reLocate(mainRow, mainCol + 1);
+    }
+
+    @Override
+    public void form2() {
+        matrix[1].reLocate(mainRow + 1, mainCol);
+    }
+
+    @Override
+    public void form3() {
+        matrix[0].reLocate(mainRow, mainCol - 1);
+    }
+
+    @Override
+    public void form4() {
+        matrix[3].reLocate(mainRow - 1, mainCol);
     }
 }

@@ -1,10 +1,12 @@
 package entities_abstract;
 
+import views.Controller;
+
 import java.awt.*;
 
 public abstract class BlockBase {
 
-    protected SquareBase[][] matrix;
+    protected SquareBase[] matrix;
 
     protected byte statusForm;
 
@@ -14,31 +16,123 @@ public abstract class BlockBase {
 
     protected int directionX;
 
-    protected int stepX;
+    protected Controller playArena;
 
-    protected int stepY;
+    protected int mainCol;
 
-    protected PlayArenaBase playArena;
+    protected int mainRow;
 
-    public abstract void addToPanel(Panel playArena);
+    public BlockBase(Controller playArena, int mainCol, int mainRow) {
+        this.matrix = new SquareBase[4];
+        this.playArena = playArena;
+        this.mainCol = mainCol;
+        this.mainRow = mainRow;
+        this.statusForm = 1;
+        this.transformable = true;
+        this.movable = true;
+        init();
+    }
 
-    public abstract void move();
+    public void addToPanel(){
+        for (SquareBase squareBase : matrix) {
+            squareBase.addToPanel();
+        }
+    }
 
-    public abstract void updateUI();
+    public void move(){
+        if (!movable) return;
+        mainCol+=directionX;
+        mainRow++;
+        for (SquareBase squareBase : matrix) {
+            squareBase.setDirectionX(this.directionX);
+            squareBase.move();
+        }
+    }
 
-    public abstract void transform();
+    public void updateUI(){
+        for (SquareBase squareBase : matrix) {
+            squareBase.updateUI();
+        }
+    }
 
-    public abstract boolean checkMovable();
+    public void transform(){
+        if (!transformable) return;
+        this.statusForm++;
+        if (statusForm > 4) statusForm = 1;
+        switch (statusForm) {
+            case 1: {
+                form1();
+                break;
+            }
+            case 2: {
+                form2();
+                break;
+            }
+            case 3: {
+                form3();
+                break;
+            }
+            case 4: {
+                form4();
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    public abstract void init();
+
+    public void checkMovable(){
+        int bottomRow = matrix[0].getIndexRow();
+        for (int i = 1; i < matrix.length; i++) {
+            if (matrix[i].getIndexRow() > bottomRow)
+                bottomRow = matrix[i].getIndexRow();
+        }
+        for (SquareBase squareBase : matrix) {
+            if (squareBase.getIndexRow() == bottomRow)
+                if (!squareBase.checkMoveDown())
+                    this.movable = false;
+        }
+    }
 
     public abstract boolean checkTransformable();
 
-    public SquareBase[][] getMatrix() {
-        return matrix;
+    public  boolean checkTurnLeft(){
+        int minCol  = matrix[0].getIndexCol();
+        for (int i = 1; i < matrix.length; i++) {
+            if (matrix[i].getIndexCol() < minCol)
+                minCol = matrix[i].getIndexCol();
+        }
+        for (SquareBase squareBase : matrix) {
+            if (squareBase.getIndexRow() == minCol)
+                if (!squareBase.checkMoveLeft())
+                    return false;
+        }
+        return true;
     }
 
-    public void setMatrix(SquareBase[][] matrix) {
-        this.matrix = matrix;
+    public  boolean checkTurnRight(){
+        int maxCol  = matrix[0].getIndexCol();
+        for (int i = 1; i < matrix.length; i++) {
+            if (matrix[i].getIndexCol() > maxCol)
+                maxCol = matrix[i].getIndexCol();
+        }
+        for (SquareBase squareBase : matrix) {
+            if (squareBase.getIndexRow() == maxCol)
+                if (!squareBase.checkMoveRight())
+                    return false;
+        }
+        return true;
     }
+
+    public abstract void form1();
+
+    public abstract void form2();
+
+    public abstract void form3();
+
+    public abstract void form4();
 
     public byte getStatusForm() {
         return statusForm;
@@ -72,27 +166,35 @@ public abstract class BlockBase {
         this.directionX = directionX;
     }
 
-    public int getStepX() {
-        return stepX;
-    }
-
-    public void setStepX(int stepX) {
-        this.stepX = stepX;
-    }
-
-    public int getStepY() {
-        return stepY;
-    }
-
-    public void setStepY(int stepY) {
-        this.stepY = stepY;
-    }
-
-    public PlayArenaBase getPlayArena() {
+    public Controller getPlayArena() {
         return playArena;
     }
 
-    public void setPlayArena(PlayArenaBase playArena) {
+    public void setPlayArena(Controller playArena) {
         this.playArena = playArena;
+    }
+
+    public SquareBase[] getMatrix() {
+        return matrix;
+    }
+
+    public void setMatrix(SquareBase[] matrix) {
+        this.matrix = matrix;
+    }
+
+    public int getMainCol() {
+        return mainCol;
+    }
+
+    public void setMainCol(int mainCol) {
+        this.mainCol = mainCol;
+    }
+
+    public int getMainRow() {
+        return mainRow;
+    }
+
+    public void setMainRow(int mainRow) {
+        this.mainRow = mainRow;
     }
 }

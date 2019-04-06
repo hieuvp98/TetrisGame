@@ -1,6 +1,7 @@
 package entities_abstract;
 
 import entities.Square;
+import views.Controller;
 
 import java.util.ArrayList;
 
@@ -8,13 +9,22 @@ public abstract class GameColumnBase {
 
     protected ArrayList<SquareBase> squareBases;
 
-    protected PlayArenaBase playArenaBase;
+    protected Controller playArenaBase;
+
+    protected int indexCol;
+
+    public GameColumnBase(Controller playArenaBase,int indexCol) {
+        this.playArenaBase = playArenaBase;
+        squareBases = new ArrayList<>();
+        squareBases.ensureCapacity(15);
+        this.indexCol = indexCol;
+    }
 
     public abstract boolean checkFull();
 
-    public abstract void addSquare(SquareBase square);
+    public abstract void addSquare(SquareBase square, int index);
 
-    public abstract void removeSquare(SquareBase square);
+    public abstract void removeSquare(int index);
 
     public ArrayList<SquareBase> getSquareBases() {
         return squareBases;
@@ -24,11 +34,11 @@ public abstract class GameColumnBase {
         this.squareBases = squareBases;
     }
 
-    public PlayArenaBase getPlayArenaBase() {
-        return playArenaBase;
+    public int getIndexCol() {
+        return indexCol;
     }
 
-    public void setPlayArenaBase(PlayArenaBase playArenaBase) {
-        this.playArenaBase = playArenaBase;
+    public void setIndexCol(int indexCol) {
+        this.indexCol = indexCol;
     }
 }

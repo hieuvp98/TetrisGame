@@ -1,46 +1,45 @@
 package entities_abstract;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import views.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 
 public abstract class SquareBase {
 
-    public static  final int WIDTH = 25;
+    public static final int WIDTH = 40;
 
-    public static  final  int HEIGHT = 25;
+    public static final int HEIGHT = 40;
 
-    public static final String URL = "";
-
-    protected double positionX;
-
-    protected double positionY;
+    public static final String URL = "images/square.png";
 
     protected int directionX;
 
-    protected int stepX;
-
-    protected int stepY;
-
-    protected boolean movable;
-
     protected boolean removable;
 
-    protected JLabel image;
+    protected ImageView imageView;
 
-    protected PlayArenaBase playArena;
+    protected Controller playArena;
 
-    protected GameRowBase row;
+    protected int indexRow;
 
-    protected GameColumnBase column;
+    protected int indexCol;
 
-    public SquareBase(GameColumnBase col, GameRowBase row, int index){
-        Icon icon = new ImageIcon(getClass().getResource(URL));
-        this.image = new JLabel(icon);
-        image.setPreferredSize(new Dimension(WIDTH,HEIGHT));
-        addToPanel(row,col,index);
+    public SquareBase(Controller playArena, int indexRow, int indexCol) {
+        Image image = new Image(getClass().getClassLoader().getResource(URL).toExternalForm());
+        this.imageView = new ImageView(image);
+        this.imageView.setFitWidth(WIDTH);
+        this.imageView.setFitHeight(HEIGHT);
+        this.removable = false;
+        directionX = 0;
+        this.playArena = playArena;
+        this.indexCol = indexCol;
+        this.indexRow = indexRow;
     }
 
-    public abstract void addToPanel(GameRowBase row,GameColumnBase column,int index);
+    public abstract void addToPanel();
 
     public abstract void remove();
 
@@ -48,22 +47,15 @@ public abstract class SquareBase {
 
     public abstract void updateUI();
 
-    public abstract boolean checkMovable();
+    public abstract boolean checkMoveDown();
 
-    public double getPositionX() {
-        return positionX;
-    }
+    public abstract boolean checkMoveLeft();
 
-    public void setPositionX(double positionX) {
-        this.positionX = positionX;
-    }
+    public abstract boolean checkMoveRight();
 
-    public double getPositionY() {
-        return positionY;
-    }
-
-    public void setPositionY(double positionY) {
-        this.positionY = positionY;
+    public void reLocate(int row, int col) {
+        setIndexRow(row);
+        setIndexCol(col);
     }
 
     public int getDirectionX() {
@@ -74,27 +66,6 @@ public abstract class SquareBase {
         this.directionX = directionX;
     }
 
-    public int getStepX() {
-        return stepX;
-    }
-
-    public void setStepX(int stepX) {
-        this.stepX = stepX;
-    }
-
-    public int getStepY() {
-        return stepY;
-    }
-
-    public void setStepY(int stepY) {
-        this.stepY = stepY;
-    }
-
-
-    public boolean isMovable() {
-        return movable;
-    }
-
     public boolean isRemovable() {
         return removable;
     }
@@ -103,35 +74,27 @@ public abstract class SquareBase {
         this.removable = removable;
     }
 
-    public JLabel getImage() {
-        return image;
+    public ImageView getImageView() {
+        return imageView;
     }
 
-    public void setImage(JLabel image) {
-        this.image = image;
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
     }
 
-    public GameRowBase getRow() {
-        return row;
+    public int getIndexRow() {
+        return indexRow;
     }
 
-    public void setRow(GameRowBase row) {
-        this.row = row;
+    public void setIndexRow(int indexRow) {
+        this.indexRow = indexRow;
     }
 
-    public GameColumnBase getColumn() {
-        return column;
+    public int getIndexCol() {
+        return indexCol;
     }
 
-    public void setColumn(GameColumnBase column) {
-        this.column = column;
-    }
-
-    public PlayArenaBase getPlayArena() {
-        return playArena;
-    }
-
-    public void setPlayArena(PlayArenaBase playArena) {
-        this.playArena = playArena;
+    public void setIndexCol(int indexCol) {
+        this.indexCol = indexCol;
     }
 }

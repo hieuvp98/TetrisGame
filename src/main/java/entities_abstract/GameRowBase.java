@@ -1,20 +1,31 @@
 package entities_abstract;
 
+import views.Controller;
+
 import java.util.ArrayList;
 
 public abstract class GameRowBase {
 
     protected ArrayList<SquareBase> squareBases;
 
-    protected PlayArenaBase playArenaBase;
+    protected Controller playArenaBase;
+
+    protected int indexRow;
+
+    public GameRowBase(Controller playArenaBase, int index) {
+        this.playArenaBase = playArenaBase;
+        this.squareBases = new ArrayList<>();
+        this.squareBases.ensureCapacity(10);
+        this.indexRow = index;
+    }
 
     public abstract boolean checkFull();
 
-    public abstract boolean remove();
+    public abstract void remove();
 
     public abstract void addSquare(SquareBase square,int index);
 
-    public abstract void removeSquare(SquareBase square);
+    public abstract void removeSquare(int index);
 
     public ArrayList<SquareBase> getSquareBases() {
         return squareBases;
@@ -24,11 +35,11 @@ public abstract class GameRowBase {
         this.squareBases = squareBases;
     }
 
-    public PlayArenaBase getPlayArenaBase() {
-        return playArenaBase;
+    public int getIndex() {
+        return indexRow;
     }
 
-    public void setPlayArenaBase(PlayArenaBase playArenaBase) {
-        this.playArenaBase = playArenaBase;
+    public void setIndex(int index) {
+        this.indexRow = index;
     }
 }

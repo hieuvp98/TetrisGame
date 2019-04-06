@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="mainPane" prefHeight="612.0" prefWidth="609.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Controller">
+   <children>
+      <GridPane id="grid" fx:id="gridPane" gridLinesVisible="true" layoutX="5.0" layoutY="6.0" prefHeight="606.0" prefWidth="406.0">
+      </GridPane>
+      <Text fill="WHITE" layoutX="429.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score">
+         <font>
+            <Font name="Comic Sans MS" size="27.0" />
+         </font>
+      </Text>
+      <Text fx:id="txtScore" fill="#2402ff" layoutX="433.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="140.1416015625">
+         <font>
+            <Font name="Comic Sans MS Bold" size="33.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="429.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level">
+         <font>
+            <Font name="Comic Sans MS" size="27.0" />
+         </font>
+      </Text>
+      <Text fx:id="txtLevel" fill="#2402ff" layoutX="429.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+         <font>
+            <Font name="Comic Sans MS Bold" size="33.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="429.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Next">
+         <font>
+            <Font name="Comic Sans MS" size="27.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="imgNext" fitHeight="122.0" fitWidth="176.0" layoutX="422.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fill="#eecccc" layoutX="455.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advanced " textAlignment="CENTER">
+         <font>
+            <Font name="Comic Sans MS" size="27.0" />
+         </font>
+      </Text>
+      <Text fill="#eecccc" layoutX="450.0" layoutY="565.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Programing" textAlignment="CENTER">
+         <font>
+            <Font name="Comic Sans MS" size="27.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
