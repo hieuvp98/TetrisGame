@@ -23,6 +23,10 @@ public abstract class SquareBase {
 
     protected Controller playArena;
 
+    protected int preIndexRow;
+
+    protected int preIndexCol;
+
     protected int indexRow;
 
     protected int indexCol;
@@ -53,10 +57,7 @@ public abstract class SquareBase {
 
     public abstract boolean checkMoveRight();
 
-    public void reLocate(int row, int col) {
-        setIndexRow(row);
-        setIndexCol(col);
-    }
+    public abstract void reLocate(int row, int col);
 
     public int getDirectionX() {
         return directionX;
@@ -96,5 +97,21 @@ public abstract class SquareBase {
 
     public void setIndexCol(int indexCol) {
         this.indexCol = indexCol;
+    }
+
+    public int getPreIndexRow() {
+        return preIndexRow;
+    }
+
+    public void setPreIndexRow(int preIndexRow) {
+        this.preIndexRow = preIndexRow;
+    }
+
+    public int getPreIndexCol() {
+        return preIndexCol;
+    }
+
+    public void setPreIndexCol(int preIndexCol) {
+        this.preIndexCol = preIndexCol;
     }
 }

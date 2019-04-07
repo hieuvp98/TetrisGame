@@ -14,7 +14,7 @@ public abstract class GameRowBase {
 
     public GameRowBase(Controller playArenaBase, int index) {
         this.playArenaBase = playArenaBase;
-        this.squareBases = new SquareBase[15];
+        this.squareBases = new SquareBase[10];
         this.indexRow = index;
     }
 

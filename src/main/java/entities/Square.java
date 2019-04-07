@@ -14,8 +14,8 @@ public class Square extends SquareBase {
 
     @Override
     public void addToPanel() {
-        playArena.getRows().get(indexRow).addSquare(this,indexCol);
-        playArena.getColumns().get(indexCol).addSquare(this,indexRow);
+        playArena.getRows().get(indexRow).addSquare(this, indexCol);
+        playArena.getColumns().get(indexCol).addSquare(this, indexRow);
     }
 
     @Override
@@ -25,32 +25,47 @@ public class Square extends SquareBase {
 
     @Override
     public void move() {
-        this.indexCol +=directionX;
+        if (this.indexRow == 14) return;
+        this.preIndexCol = this.indexCol;
+        this.preIndexRow = this.indexRow;
+        if ((directionX == 1 && indexCol < 14) || (directionX == -1 && indexCol > 0))
+        this.indexCol += directionX;
         this.indexRow++;
     }
 
     @Override
     public void updateUI() {
-        GameRowBase row = playArena.getRows().get(indexRow);
+        GameRowBase row = playArena.getRows().get(preIndexRow);
         row.removeSquare(this);
-        GameColumnBase col = playArena.getColumns().get(indexCol);
+        GameColumnBase col = playArena.getColumns().get(preIndexCol);
         col.removeSquare(this);
-        playArena.getRows().get(indexRow).addSquare(this,indexRow);
-        playArena.getColumns().get(indexCol).addSquare(this,indexCol);
+        playArena.getRows().get(indexRow).addSquare(this, indexCol);
+        playArena.getColumns().get(indexCol).addSquare(this, indexRow);
     }
 
     @Override
     public boolean checkMoveDown() {
-        return playArena.getColumns().get(this.indexCol).getSquareBases()[this.indexRow+1] == null;
+        if (indexRow == 14) return false;
+        return playArena.getColumns().get(this.indexCol).getSquareBases()[this.indexRow + 1] == null;
     }
 
     @Override
     public boolean checkMoveLeft() {
-        return playArena.getRows().get(this.indexRow).getSquareBases()[this.indexCol-1] == null;
+        if (indexCol == 1) return false;
+        return playArena.getRows().get(this.indexRow).getSquareBases()[this.indexCol - 1] == null;
     }
 
     @Override
     public boolean checkMoveRight() {
-        return playArena.getRows().get(this.indexRow).getSquareBases()[this.indexCol+1] == null;
+        if (indexCol == 8) return false;
+        return playArena.getRows().get(this.indexRow).getSquareBases()[this.indexCol + 1] == null;
+    }
+
+    @Override
+    public void reLocate(int row, int col) {
+        this.preIndexCol = this.indexCol;
+        this.preIndexRow = this.indexRow;
+        this.indexCol  = col;
+        this.indexRow = row;
     }
 }

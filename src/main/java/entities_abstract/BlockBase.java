@@ -3,6 +3,9 @@ package entities_abstract;
 import views.Controller;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class BlockBase {
 
@@ -30,32 +33,34 @@ public abstract class BlockBase {
         this.statusForm = 1;
         this.transformable = true;
         this.movable = true;
+        this.directionX = 0;
         init();
     }
 
-    public void addToPanel(){
+    public void addToPanel() {
         for (SquareBase squareBase : matrix) {
             squareBase.addToPanel();
         }
     }
 
-    public void move(){
+    public void move() {
         if (!movable) return;
-        mainCol+=directionX;
+        mainCol += directionX;
         mainRow++;
         for (SquareBase squareBase : matrix) {
             squareBase.setDirectionX(this.directionX);
             squareBase.move();
         }
+        updateUI();
     }
 
-    public void updateUI(){
+    public void updateUI() {
         for (SquareBase squareBase : matrix) {
             squareBase.updateUI();
         }
     }
 
-    public void transform(){
+    public void transform() {
         if (!transformable) return;
         this.statusForm++;
         if (statusForm > 4) statusForm = 1;
@@ -79,27 +84,30 @@ public abstract class BlockBase {
             default:
                 break;
         }
+        updateUI();
     }
 
     public abstract void init();
 
-    public void checkMovable(){
-        int bottomRow = matrix[0].getIndexRow();
-        for (int i = 1; i < matrix.length; i++) {
-            if (matrix[i].getIndexRow() > bottomRow)
-                bottomRow = matrix[i].getIndexRow();
-        }
-        for (SquareBase squareBase : matrix) {
-            if (squareBase.getIndexRow() == bottomRow)
-                if (!squareBase.checkMoveDown())
+    public boolean checkMovable() {
+        List<SquareBase> test = Arrays.asList(matrix);
+        for (SquareBase square : matrix) {
+            if (square.indexRow == 14) {
+                this.movable = false;
+                return false;
+            } else if (!test.contains(playArena.getColumns().get(square.getIndexCol()).squareBases[square.indexRow + 1]))
+                if (!square.checkMoveDown()) {
                     this.movable = false;
+                    return false;
+                }
         }
+        return true;
     }
 
     public abstract boolean checkTransformable();
 
-    public  boolean checkTurnLeft(){
-        int minCol  = matrix[0].getIndexCol();
+    public boolean checkTurnLeft() {
+        int minCol = matrix[0].getIndexCol();
         for (int i = 1; i < matrix.length; i++) {
             if (matrix[i].getIndexCol() < minCol)
                 minCol = matrix[i].getIndexCol();
@@ -112,8 +120,8 @@ public abstract class BlockBase {
         return true;
     }
 
-    public  boolean checkTurnRight(){
-        int maxCol  = matrix[0].getIndexCol();
+    public boolean checkTurnRight() {
+        int maxCol = matrix[0].getIndexCol();
         for (int i = 1; i < matrix.length; i++) {
             if (matrix[i].getIndexCol() > maxCol)
                 maxCol = matrix[i].getIndexCol();

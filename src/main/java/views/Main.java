@@ -19,6 +19,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Frame.fxml"));
         primaryStage.setTitle("Tetris");
         Scene scene = new Scene(root, 610  , 610);
+        scene.getRoot().requestFocus();
         scene.getStylesheets().add("css/main.css");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

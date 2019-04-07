@@ -29,7 +29,12 @@ public class GameColumn extends GameColumnBase {
 
     @Override
     public void removeSquare(SquareBase square) {
-        this.squareBases[Arrays.asList(this.squareBases).indexOf(square)] = null;
+        for (int i = 0; i < this.squareBases.length; i++) {
+            if (square == squareBases[i]){
+                squareBases[i] = null;
+                break;
+            }
+        }
       //  this.playArenaBase.gridPane.getChildren().remove(square.getImageView());
     }
 }
