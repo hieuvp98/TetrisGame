@@ -1,11 +1,7 @@
 package entities_abstract;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import views.Controller;
-
-import javax.swing.*;
-import java.awt.*;
 
 public abstract class SquareBase {
 
@@ -13,11 +9,13 @@ public abstract class SquareBase {
 
     public static final int HEIGHT = 40;
 
-    public static final String URL = "images/square.png";
+    public static final String URL = "images/xsquare1.png";
 
     protected int directionX;
 
     protected boolean removable;
+
+    protected boolean onMove = false;
 
     protected ImageView imageView;
 
@@ -32,8 +30,8 @@ public abstract class SquareBase {
     protected int indexCol;
 
     public SquareBase(Controller playArena, int indexRow, int indexCol) {
-        Image image = new Image(getClass().getClassLoader().getResource(URL).toExternalForm());
-        this.imageView = new ImageView(image);
+//        Image image = new Image(getClass().getClassLoader().getResource(URL).toExternalForm());
+        this.imageView = new ImageView();
         this.imageView.setFitWidth(WIDTH);
         this.imageView.setFitHeight(HEIGHT);
         this.removable = false;
@@ -45,7 +43,7 @@ public abstract class SquareBase {
 
     public abstract void addToPanel();
 
-    public abstract void remove();
+    public abstract void changeCol();
 
     public abstract void move();
 

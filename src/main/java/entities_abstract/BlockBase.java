@@ -2,12 +2,11 @@ package entities_abstract;
 
 import views.Controller;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public abstract class BlockBase {
+    private boolean onMove = false;
 
     protected SquareBase[] matrix;
 
@@ -46,22 +45,25 @@ public abstract class BlockBase {
     public void move() {
         if (!movable) return;
         mainCol += directionX;
+        if (! onMove)
         mainRow++;
+        onMove = !onMove;
         for (SquareBase squareBase : matrix) {
             squareBase.setDirectionX(this.directionX);
             squareBase.move();
         }
         updateUI();
+        directionX = 0;
     }
 
-    public void updateUI() {
+    private void updateUI() {
         for (SquareBase squareBase : matrix) {
             squareBase.updateUI();
         }
     }
 
     public void transform() {
-        if (!transformable) return;
+        if (!transformable || !movable) return;
         this.statusForm++;
         if (statusForm > 4) statusForm = 1;
         switch (statusForm) {
@@ -94,6 +96,7 @@ public abstract class BlockBase {
         for (SquareBase square : matrix) {
             if (square.indexRow == 14) {
                 this.movable = false;
+                System.out.println("end");
                 return false;
             } else if (!test.contains(playArena.getColumns().get(square.getIndexCol()).squareBases[square.indexRow + 1]))
                 if (!square.checkMoveDown()) {
@@ -107,29 +110,27 @@ public abstract class BlockBase {
     public abstract boolean checkTransformable();
 
     public boolean checkTurnLeft() {
-        int minCol = matrix[0].getIndexCol();
-        for (int i = 1; i < matrix.length; i++) {
-            if (matrix[i].getIndexCol() < minCol)
-                minCol = matrix[i].getIndexCol();
-        }
-        for (SquareBase squareBase : matrix) {
-            if (squareBase.getIndexRow() == minCol)
-                if (!squareBase.checkMoveLeft())
+        List<SquareBase> test = Arrays.asList(matrix);
+        for (SquareBase square : matrix) {
+            if (square.indexCol == 0) {
+                return false;
+            } else if (!test.contains(playArena.getRows().get(square.getIndexRow()).squareBases[square.indexCol - 1]))
+                if (!square.checkMoveLeft()) {
                     return false;
+                }
         }
         return true;
     }
 
     public boolean checkTurnRight() {
-        int maxCol = matrix[0].getIndexCol();
-        for (int i = 1; i < matrix.length; i++) {
-            if (matrix[i].getIndexCol() > maxCol)
-                maxCol = matrix[i].getIndexCol();
-        }
-        for (SquareBase squareBase : matrix) {
-            if (squareBase.getIndexRow() == maxCol)
-                if (!squareBase.checkMoveRight())
+        List<SquareBase> test = Arrays.asList(matrix);
+        for (SquareBase square : matrix) {
+            if (square.indexCol == 9) {
+                return false;
+            } else if (!test.contains(playArena.getRows().get(square.getIndexRow()).squareBases[square.indexCol + 1]))
+                if (!square.checkMoveRight()) {
                     return false;
+                }
         }
         return true;
     }

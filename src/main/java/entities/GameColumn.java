@@ -24,7 +24,6 @@ public class GameColumn extends GameColumnBase {
     @Override
     public void addSquare(SquareBase square, int index) {
         this.squareBases[index] = square;
-      //  this.playArenaBase.gridPane.add(square.getImageView(),indexCol,index);
     }
 
     @Override
@@ -35,6 +34,5 @@ public class GameColumn extends GameColumnBase {
                 break;
             }
         }
-      //  this.playArenaBase.gridPane.getChildren().remove(square.getImageView());
     }
 }

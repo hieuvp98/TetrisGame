@@ -2,11 +2,12 @@ package entities;
 
 import entities_abstract.BlockBase;
 import entities_abstract.SquareBase;
+import javafx.scene.image.Image;
 import views.Controller;
 
-import java.util.ArrayList;
-
 public class TBlock extends BlockBase {
+
+    private static final String URL = "images/xsquare6.png";
 
 
     public TBlock(Controller playArena, int mainCol, int mainRow) {
@@ -19,6 +20,9 @@ public class TBlock extends BlockBase {
         matrix[1] = new Square(playArena, mainRow, mainCol - 1);
         matrix[2] = new Square(playArena, mainRow, mainCol);
         matrix[3] = new Square(playArena, mainRow, mainCol + 1);
+        for (SquareBase squareBase : matrix) {
+            squareBase.getImageView().setImage(new Image(getClass().getClassLoader().getResource(URL).toExternalForm()));
+        }
     }
 
     @Override
@@ -35,13 +39,9 @@ public class TBlock extends BlockBase {
                 if (squareBases[mainRow - 1] != null || squareBases[mainRow] != null)
                     return false;
             }
-            case 3:
-            case 4: {
-                return true;
-            }
+            default: return true;
 
         }
-        return true;
     }
 
     @Override
@@ -54,16 +54,25 @@ public class TBlock extends BlockBase {
 
     @Override
     public void form2() {
+        matrix[0].reLocate(mainRow - 1, mainCol);
         matrix[1].reLocate(mainRow + 1, mainCol);
+        matrix[2].reLocate(mainRow, mainCol);
+        matrix[3].reLocate(mainRow, mainCol + 1);
     }
 
     @Override
     public void form3() {
         matrix[0].reLocate(mainRow, mainCol - 1);
+        matrix[1].reLocate(mainRow + 1, mainCol);
+        matrix[2].reLocate(mainRow, mainCol);
+        matrix[3].reLocate(mainRow, mainCol + 1);
     }
 
     @Override
     public void form4() {
+        matrix[0].reLocate(mainRow, mainCol - 1);
+        matrix[1].reLocate(mainRow + 1, mainCol);
+        matrix[2].reLocate(mainRow, mainCol);
         matrix[3].reLocate(mainRow - 1, mainCol);
     }
 }

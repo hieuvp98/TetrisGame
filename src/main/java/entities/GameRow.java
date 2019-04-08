@@ -23,11 +23,12 @@ public class GameRow extends GameRowBase {
     @Override
     public void remove() {
         for (int i = 0; i < 10; i++) {
-            squareBases[i] = null;
+            this.playArenaBase.gridPane.getChildren().remove(squareBases[i].getImageView());
         }
-        for (int i = 0; i < 10; i++) {
-            this.playArenaBase.gridPane.add(null, i, indexRow);
-        }
+        squareBases = new SquareBase[10];
+        playArenaBase.getColumns().forEach(gameColumnBase -> {
+            gameColumnBase.getSquareBases()[this.indexRow] = null;
+        });
     }
 
     @Override

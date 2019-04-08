@@ -50,11 +50,4 @@ public abstract class GameRowBase {
         this.indexRow = indexRow;
     }
 
-    public int getIndex() {
-        return indexRow;
-    }
-
-    public void setIndex(int index) {
-        this.indexRow = index;
-    }
 }

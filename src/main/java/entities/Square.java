@@ -19,8 +19,8 @@ public class Square extends SquareBase {
     }
 
     @Override
-    public void remove() {
-        this.removable = true;
+    public void changeCol() {// this.preIndexRow = this.indexRow;
+
     }
 
     @Override
@@ -29,8 +29,10 @@ public class Square extends SquareBase {
         this.preIndexCol = this.indexCol;
         this.preIndexRow = this.indexRow;
         if ((directionX == 1 && indexCol < 14) || (directionX == -1 && indexCol > 0))
-        this.indexCol += directionX;
+            this.indexCol += directionX;
+        if (!onMove)
         this.indexRow++;
+        onMove = !onMove;
     }
 
     @Override
@@ -46,18 +48,24 @@ public class Square extends SquareBase {
     @Override
     public boolean checkMoveDown() {
         if (indexRow == 14) return false;
-        return playArena.getColumns().get(this.indexCol).getSquareBases()[this.indexRow + 1] == null;
+        GameColumnBase col = playArena.getColumns().get(this.indexCol);
+        SquareBase[] squares = col.getSquareBases();
+        if (squares[this.indexRow+1] != null){
+            System.out.println("cant move");
+            return false;}
+        return true;
+
     }
 
     @Override
     public boolean checkMoveLeft() {
-        if (indexCol == 1) return false;
+        if (indexCol == 0) return false;
         return playArena.getRows().get(this.indexRow).getSquareBases()[this.indexCol - 1] == null;
     }
 
     @Override
     public boolean checkMoveRight() {
-        if (indexCol == 8) return false;
+        if (indexCol == 9) return false;
         return playArena.getRows().get(this.indexRow).getSquareBases()[this.indexCol + 1] == null;
     }
 
@@ -65,7 +73,7 @@ public class Square extends SquareBase {
     public void reLocate(int row, int col) {
         this.preIndexCol = this.indexCol;
         this.preIndexRow = this.indexRow;
-        this.indexCol  = col;
+        this.indexCol = col;
         this.indexRow = row;
     }
 }
