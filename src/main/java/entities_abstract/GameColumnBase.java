@@ -15,7 +15,7 @@ public abstract class GameColumnBase {
 
     public GameColumnBase(Controller playArenaBase,int indexCol) {
         this.playArenaBase = playArenaBase;
-        squareBases = new SquareBase[15];
+        squareBases = new SquareBase[Controller.TOTAL_ROW];
         this.indexCol = indexCol;
     }
 

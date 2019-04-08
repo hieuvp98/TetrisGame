@@ -18,7 +18,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Frame.fxml"));
         primaryStage.setTitle("Tetris");
-        Scene scene = new Scene(root, 610  , 610);
+        Scene scene = new Scene(root, 610  , 730);
         scene.getRoot().requestFocus();
         scene.getStylesheets().add("css/main.css");
         primaryStage.setScene(scene);

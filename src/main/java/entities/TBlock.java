@@ -33,15 +33,16 @@ public class TBlock extends BlockBase {
                 SquareBase[] squareBases = playArena.getRows().get(mainRow + 1).getSquareBases();
                 if (squareBases[mainCol - 1] != null || squareBases[mainCol] != null)
                     return false;
+                break;
             }
             case 2: {
                 SquareBase[] squareBases = playArena.getColumns().get(mainCol).getSquareBases();
                 if (squareBases[mainRow - 1] != null || squareBases[mainRow] != null)
                     return false;
+                break;
             }
-            default: return true;
-
         }
+        return true;
     }
 
     @Override

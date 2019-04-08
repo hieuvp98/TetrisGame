@@ -25,14 +25,16 @@ public class Square extends SquareBase {
 
     @Override
     public void move() {
-        if (this.indexRow == 14) return;
+        if (this.indexRow == Controller.TOTAL_ROW - 1) return;
         this.preIndexCol = this.indexCol;
         this.preIndexRow = this.indexRow;
         if ((directionX == 1 && indexCol < 14) || (directionX == -1 && indexCol > 0))
             this.indexCol += directionX;
-        if (!onMove)
-        this.indexRow++;
-        onMove = !onMove;
+        if (count == 4){
+            this.indexRow++;
+            count = 0;
+        }
+        count++;
     }
 
     @Override
@@ -47,7 +49,7 @@ public class Square extends SquareBase {
 
     @Override
     public boolean checkMoveDown() {
-        if (indexRow == 14) return false;
+        if (indexRow == Controller.TOTAL_ROW - 1) return false;
         GameColumnBase col = playArena.getColumns().get(this.indexCol);
         SquareBase[] squares = col.getSquareBases();
         if (squares[this.indexRow+1] != null){

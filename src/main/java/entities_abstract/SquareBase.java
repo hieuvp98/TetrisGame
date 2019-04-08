@@ -15,7 +15,7 @@ public abstract class SquareBase {
 
     protected boolean removable;
 
-    protected boolean onMove = false;
+    protected int count = 0;
 
     protected ImageView imageView;
 

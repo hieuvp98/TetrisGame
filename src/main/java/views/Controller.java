@@ -24,7 +24,9 @@ public class Controller implements Initializable {
 
     private int loop = DEFAULT_LOOP;
 
-    private static final int DEFAULT_LOOP = 200;
+    public static final int TOTAL_ROW = 18;
+
+    private static final int DEFAULT_LOOP = 150;
     @FXML
     public GridPane gridPane;
     @FXML
@@ -38,8 +40,6 @@ public class Controller implements Initializable {
 
     @FXML
     public Pane mainPane;
-
-    private Alert alert;
 
     private ArrayList<GameRowBase> rows;
 
@@ -70,20 +70,17 @@ public class Controller implements Initializable {
             }
         };
         timer.start();
-        alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Tetris");
-        alert.setHeaderText("GAME OVER. Do you want to replay?");
     }
 
     private void initGrid() {
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < TOTAL_ROW; i++) {
             gridPane.addRow(i);
         }
         for (int i = 1; i < 10; i++) {
             gridPane.addColumn(i);
         }
         gridPane.setGridLinesVisible(false);
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < TOTAL_ROW; i++) {
             for (int j = 0; j < 10; j++) {
                 Label node = new Label();
                 node.getStyleClass().add("node");
@@ -99,7 +96,7 @@ public class Controller implements Initializable {
         for (int i = 0; i < 10; i++) {
             columns.add(new GameColumn(this, i));
         }
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < TOTAL_ROW; i++) {
             rows.add(new GameRow(this, i));
         }
     }
@@ -198,16 +195,15 @@ public class Controller implements Initializable {
                 currentBlock.setDirectionX(-1);
             }
 
-            if (event.getCode() == KeyCode.UP)
+            if (event.getCode() == KeyCode.UP )
                 currentBlock.transform();
             else if (event.getCode() == KeyCode.DOWN)
-                loop = 25;
+                loop = 1;
             if (event.getCode() == KeyCode.SPACE)
                 runnable = !runnable;
         });
         mainPane.setOnKeyReleased(event -> {
             loop = DEFAULT_LOOP;
-            currentBlock.setDirectionX(0);
         });
     }
 

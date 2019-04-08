@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class BlockBase {
-    private boolean onMove = false;
+
+    private int count = 0;
 
     protected SquareBase[] matrix;
 
@@ -45,9 +46,11 @@ public abstract class BlockBase {
     public void move() {
         if (!movable) return;
         mainCol += directionX;
-        if (! onMove)
+        if (count == 4){
         mainRow++;
-        onMove = !onMove;
+        count = 0;
+        }
+        count++;
         for (SquareBase squareBase : matrix) {
             squareBase.setDirectionX(this.directionX);
             squareBase.move();
@@ -94,7 +97,7 @@ public abstract class BlockBase {
     public boolean checkMovable() {
         List<SquareBase> test = Arrays.asList(matrix);
         for (SquareBase square : matrix) {
-            if (square.indexRow == 14) {
+            if (square.indexRow == Controller.TOTAL_ROW - 1) {
                 this.movable = false;
                 System.out.println("end");
                 return false;

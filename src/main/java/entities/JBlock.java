@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import views.Controller;
 
 /**
- *
  * @author hoai
  */
 public class JBlock extends BlockBase {
@@ -24,10 +23,10 @@ public class JBlock extends BlockBase {
 
     @Override
     public void init() {
-        matrix[0] = new Square(playArena, mainRow-1, mainCol);
+        matrix[0] = new Square(playArena, mainRow - 1, mainCol);
         matrix[1] = new Square(playArena, mainRow, mainCol);
-        matrix[2] = new Square(playArena, mainRow+1, mainCol-1);
-        matrix[3] = new Square(playArena, mainRow+1, mainCol);
+        matrix[2] = new Square(playArena, mainRow + 1, mainCol - 1);
+        matrix[3] = new Square(playArena, mainRow + 1, mainCol);
         for (SquareBase squareBase : matrix) {
             squareBase.getImageView().setImage(new Image(getClass().getClassLoader().getResource(URL).toExternalForm()));
         }
@@ -35,29 +34,32 @@ public class JBlock extends BlockBase {
 
     @Override
     public boolean checkTransformable() {
-        switch(statusForm){
+        switch (statusForm) {
             case 1: {
-                SquareBase[] squareBases = playArena.getColumns().get(mainCol+1).getSquareBases();
-                if(squareBases[mainRow]!=null || squareBases[mainRow+1]!=null)
+                SquareBase[] squareBases = playArena.getColumns().get(mainCol + 1).getSquareBases();
+                if (squareBases[mainRow] != null || squareBases[mainRow + 1] != null)
                     return false;
+                break;
             }
             case 2: {
-                SquareBase[] squareBases = playArena.getRows().get(mainRow+1).getSquareBases();
-                if(squareBases[mainCol-1]!=null || squareBases[ mainCol]!=null || squareBases[mainCol+1]!=null)
+                SquareBase[] squareBases = playArena.getRows().get(mainRow + 1).getSquareBases();
+                if (squareBases[mainCol - 1] != null || squareBases[mainCol] != null || squareBases[mainCol + 1] != null)
                     return false;
+                break;
             }
             case 3: {
                 SquareBase[] squareBases = playArena.getRows().get(mainCol).getSquareBases();
-                SquareBase[] squareBases1 = playArena.getRows().get(mainRow+1).getSquareBases();
-                if( squareBases[mainCol-1]!=null || squareBases[mainCol+1]!=null||
-                        squareBases1[mainCol-1]!=null || squareBases[mainCol+1]!=null)
+                SquareBase[] squareBases1 = playArena.getRows().get(mainRow + 1).getSquareBases();
+                if (squareBases[mainCol - 1] != null || squareBases[mainCol + 1] != null ||
+                        squareBases1[mainCol - 1] != null || squareBases[mainCol + 1] != null)
                     return false;
-
+                break;
             }
             case 4: {
-                SquareBase[] squareBases = playArena.getRows().get(mainRow+1).getSquareBases();
-                if(squareBases[mainCol-1]!=null|| squareBases[mainCol]!=null)
+                SquareBase[] squareBases = playArena.getRows().get(mainRow + 1).getSquareBases();
+                if (squareBases[mainCol - 1] != null || squareBases[mainCol] != null)
                     return false;
+                break;
             }
 
         }
@@ -66,31 +68,31 @@ public class JBlock extends BlockBase {
 
     @Override
     public void form1() {
-        matrix[0].reLocate(mainRow-1, mainCol);
+        matrix[0].reLocate(mainRow - 1, mainCol);
         matrix[1].reLocate(mainRow, mainCol);
-        matrix[2].reLocate(mainRow+1, mainCol-1);
-        matrix[3].reLocate(mainRow+1, mainCol);
+        matrix[2].reLocate(mainRow + 1, mainCol - 1);
+        matrix[3].reLocate(mainRow + 1, mainCol);
     }
 
     @Override
     public void form2() {
-        matrix[0].reLocate(mainRow, mainCol+1);
-        matrix[2].reLocate(mainRow-1, mainCol-1);
-        matrix[3].reLocate(mainRow, mainCol-1);
+        matrix[0].reLocate(mainRow, mainCol + 1);
+        matrix[2].reLocate(mainRow - 1, mainCol - 1);
+        matrix[3].reLocate(mainRow, mainCol - 1);
     }
 
     @Override
     public void form3() {
-        matrix[0].reLocate(mainRow+1, mainCol);
-        matrix[2].reLocate(mainRow-1, mainCol+1);
-        matrix[3].reLocate(mainRow-1, mainCol);
+        matrix[0].reLocate(mainRow + 1, mainCol);
+        matrix[2].reLocate(mainRow - 1, mainCol + 1);
+        matrix[3].reLocate(mainRow - 1, mainCol);
     }
 
     @Override
     public void form4() {
-        matrix[0].reLocate(mainRow, mainCol-1);
-        matrix[3].reLocate(mainRow, mainCol+1);
-        matrix[2].reLocate(mainRow+1, mainCol+1);
+        matrix[0].reLocate(mainRow, mainCol - 1);
+        matrix[3].reLocate(mainRow, mainCol + 1);
+        matrix[2].reLocate(mainRow + 1, mainCol + 1);
     }
 
 }

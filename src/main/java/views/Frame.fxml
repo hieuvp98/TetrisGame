@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="mainPane" prefHeight="612.0" prefWidth="609.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Controller">
+<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="609.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Controller">
    <children>
-      <GridPane id="grid" fx:id="gridPane" gridLinesVisible="true" layoutX="5.0" layoutY="6.0" prefHeight="606.0" prefWidth="406.0">
+      <GridPane id="grid" fx:id="gridPane" gridLinesVisible="true" layoutX="5.0" layoutY="6.0" prefHeight="730.0" prefWidth="406.0">
       </GridPane>
       <Text fill="WHITE" layoutX="429.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score">
          <font>
