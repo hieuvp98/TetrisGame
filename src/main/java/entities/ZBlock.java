@@ -36,35 +36,34 @@ public class ZBlock extends BlockBase {
     public boolean checkTransformable() {
         switch (statusForm) {
             case 1: {
-                SquareBase[] squareBases = playArena.getRows().get(mainRow + 1).getSquareBases();
-                SquareBase[] squareBases1 = playArena.getRows().get(mainRow).getSquareBases();
-                SquareBase[] squareBases2 = playArena.getRows().get(mainRow - 1).getSquareBases();
-                if (squareBases[mainCol - 1] != null || squareBases[mainCol] != null || squareBases[mainCol + 1] != null
-                        || squareBases1[mainCol - 1] != null || squareBases2[mainCol + 1] != null)
+                SquareBase[] squareBasesTop = playArena.getRows().get(mainRow - 1).getSquareBases();
+                SquareBase[] squareBasesBottom = playArena.getRows().get(mainRow + 1).getSquareBases();
+                if (squareBasesTop[mainCol + 1] != null || squareBasesBottom[mainCol] != null || squareBasesBottom[mainCol + 1] != null)
                     return false;
+                break;
             }
             case 2: {
-                SquareBase[] squareBases = playArena.getColumns().get(mainCol - 1).getSquareBases();
-                SquareBase[] squareBases1 = playArena.getColumns().get(mainCol + 1).getSquareBases();
-                if (squareBases[mainRow - 1] != null || squareBases[mainRow] != null || squareBases[mainRow + 1] != null
-                        || squareBases1[mainRow + 1] != null)
+                if (matrix[2].getIndexCol() == 0) return false;
+                SquareBase[] squareBasesLeft = playArena.getColumns().get(mainCol - 1).getSquareBases();
+                SquareBase[] squareBasesRight = playArena.getColumns().get(mainCol + 1).getSquareBases();
+                if (squareBasesLeft[mainRow] != null || squareBasesLeft[mainRow + 1] != null || squareBasesRight[mainRow + 1] != null)
                     return false;
+                break;
             }
             case 3: {
-                SquareBase[] squareBases = playArena.getRows().get(mainRow - 1).getSquareBases();
-                SquareBase[] squareBases1 = playArena.getRows().get(mainRow).getSquareBases();
-                SquareBase[] squareBases2 = playArena.getRows().get(mainRow + 1).getSquareBases();
-                if (squareBases[mainCol - 1] != null || squareBases[mainCol] != null || squareBases[mainCol + 1] != null
-                        || squareBases1[mainCol + 1] != null || squareBases2[mainCol - 1] != null)
+                SquareBase[] squareBasesTop = playArena.getRows().get(mainRow - 1).getSquareBases();
+                SquareBase[] squareBasesBottom = playArena.getRows().get(mainRow + 1).getSquareBases();
+                if (squareBasesTop[mainCol - 1] != null || squareBasesTop[mainCol] != null || squareBasesBottom[mainCol - 1] != null)
                     return false;
+                break;
             }
             case 4: {
-                SquareBase[] squareBases = playArena.getColumns().get(mainCol + 1).getSquareBases();
-                SquareBase[] squareBases1 = playArena.getColumns().get(mainCol).getSquareBases();
-                SquareBase[] squareBases2 = playArena.getColumns().get(mainCol - 1).getSquareBases();
-                if (squareBases[mainRow - 1] != null || squareBases[mainRow] != null || squareBases[mainRow + 1] != null
-                        || squareBases1[mainRow + 1] != null || squareBases2[mainRow - 1] != null)
+                if (matrix[2].getIndexCol() == 9) return false;
+                SquareBase[] squareBasesLeft = playArena.getColumns().get(mainCol - 1).getSquareBases();
+                SquareBase[] squareBasesRight = playArena.getColumns().get(mainCol + 1).getSquareBases();
+                if (squareBasesLeft[mainRow - 1] != null || squareBasesRight[mainRow - 1] != null || squareBasesRight[mainRow] != null)
                     return false;
+                break;
             }
 
         }
@@ -89,12 +88,16 @@ public class ZBlock extends BlockBase {
 
     @Override
     public void form3() {
-        form1();
+        matrix[0].reLocate(mainRow + 1, mainCol + 1);
+        matrix[1].reLocate(mainRow + 1, mainCol);
+        matrix[3].reLocate(mainRow , mainCol - 1);
     }
 
     @Override
     public void form4() {
-        form2();
+        matrix[0].reLocate(mainRow + 1, mainCol - 1);
+        matrix[1].reLocate(mainRow, mainCol - 1);
+        matrix[3].reLocate(mainRow - 1, mainCol);
     }
 
 }

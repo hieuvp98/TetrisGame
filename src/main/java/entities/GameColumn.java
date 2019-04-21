@@ -18,7 +18,7 @@ public class GameColumn extends GameColumnBase {
         for (SquareBase squareBase : this.squareBases) {
             if (squareBase != null) dem++;
         }
-        return dem == 15;
+        return dem == Controller.TOTAL_ROW;
     }
 
     @Override

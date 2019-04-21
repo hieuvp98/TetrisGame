@@ -78,12 +78,17 @@ public class IBlock extends BlockBase {
 
     @Override
     public void form3() {
-        form1();
+        matrix[0].reLocate(mainRow, mainCol + 1);
+        matrix[2].reLocate(mainRow, mainCol - 1);
+        matrix[3].reLocate(mainRow, mainCol - 2);
+
     }
 
     @Override
     public void form4() {
-        form2();
+        matrix[0].reLocate(mainRow + 1, mainCol);
+        matrix[2].reLocate(mainRow - 1, mainCol);
+        matrix[3].reLocate(mainRow - 2, mainCol);
     }
 
 }

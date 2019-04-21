@@ -4,8 +4,6 @@ import entities_abstract.GameRowBase;
 import entities_abstract.SquareBase;
 import views.Controller;
 
-import java.util.Arrays;
-
 public class GameRow extends GameRowBase {
     public GameRow(Controller playArenaBase, int index) {
         super(playArenaBase, index);
@@ -24,6 +22,11 @@ public class GameRow extends GameRowBase {
     public void remove() {
         for (int i = 0; i < 10; i++) {
             this.playArenaBase.gridPane.getChildren().remove(squareBases[i].getImageView());
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         squareBases = new SquareBase[10];
         playArenaBase.getColumns().forEach(gameColumnBase -> {

@@ -38,6 +38,8 @@ public class Controller implements Initializable {
 
     private int bonus = -1;
 
+    private AnimationTimer timer;
+
     @FXML
     public Pane mainPane;
 
@@ -53,16 +55,19 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        init();
+    }
+
+    private void init(){
         initGrid();
         initRowsCols();
         initBlock();
-      //  imgNext.setImage(new Image(getClass().getClassLoader().getResource("images/T-block.png").toExternalForm()));
         eventHandler();
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 try {
-                    if (runnable && isAlive)
+                    if (runnable && isAlive && !checkDie())
                         gameLoop();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -103,7 +108,10 @@ public class Controller implements Initializable {
 
     private boolean checkDie() {
         for (GameColumnBase column : columns) {
-            if (column.checkFull()) return true;
+            if (column.checkFull()) {
+                System.out.println("game over");
+                return true;
+            }
         }
         return false;
     }
@@ -168,6 +176,7 @@ public class Controller implements Initializable {
                 break;
             }
         }
+       // currentBlock = new SBlock(this,5,1);
         currentBlock.addToPanel();
         loop = DEFAULT_LOOP;
         try {
